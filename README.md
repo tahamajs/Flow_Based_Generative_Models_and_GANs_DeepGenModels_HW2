@@ -1,142 +1,162 @@
-# ELBO-KL-Bayesian-VAE-GAN-HW2
+# **Advanced Generative Models - Homework 2**
 
-## 📌 Table of Contents
+**University of Tehran** | **Department of Electrical and Computer Engineering**
 
-- [Introduction](#introduction)
-- [Course Information](#course-information)
-- [Assignment Details](#assignment-details)
-- [Sections Overview](#sections-overview)
-  - [Flow-Based Generative Models](#flow-based-generative-models)
-  - [Generative Adversarial Networks (GANs)](#generative-adversarial-networks-gans)
-- [Implementation Details](#implementation-details)
-- [Mathematical Derivations](#mathematical-derivations)
-- [Training and Experimentation](#training-and-experimentation)
-- [Submission Guidelines](#submission-guidelines)
-- [Academic Integrity Policy](#academic-integrity-policy)
-- [License](#license)
+ **Course** : Deep Generative Models |  **Instructor** : Dr. Mostafa Tavasoli |  **Term** : Fall 1403
+
+ **Author** : *Taha Majlesi*
+
+ **Email** : [taha.maj4@gmail.com](mailto:taha.maj4@gmail.com) | [tahamajlesi@ut.ac.ir](mailto:tahamajlesi@ut.ac.ir)
+
+ **Profiles** : [LinkedIn](https://www.linkedin.com/in/tahamajlesi/) | [GitHub](https://github.com/tahamajs) | [Hugging Face](https://huggingface.co/tahamajs/plamma)
 
 ---
 
-## 📝 Introduction
+## **Table of Contents**
 
-This repository contains **Homework 2** for the **Deep Generative Models** course at the **University of Tehran**. This assignment covers **advanced generative models**, including:
-
-- **Flow-based models** (e.g., RealNVP, Residual Flows)
-- **Generative Adversarial Networks (GANs)**
-- **Wasserstein GAN (WGAN)** and improvements over standard GANs
-- **Likelihood-based out-of-distribution (OOD) detection**
-- **Mathematical derivations and deep learning implementations**
-
-By completing this assignment, students will gain hands-on experience with **modern generative models**, understand their strengths and weaknesses, and implement them in Python.
-
----
-
-## 🎓 Course Information
-
-- **University**: University of Tehran
-- **Department**: Electrical and Computer Engineering
-- **Course**: Deep Generative Models
-- **Instructor**: Dr. Mostafa Tavasoli
-- **Term**: Fall 1403
+* [Introduction](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#introduction)
+* [Course Information](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#course-information)
+* [Assignment Details](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#assignment-details)
+* [Sections Overview](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#sections-overview)
+  * [Flow-Based Generative Models](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#flow-based-generative-models)
+  * [Generative Adversarial Networks (GANs)](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#generative-adversarial-networks-gans)
+* [Implementation Details](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#implementation-details)
+* [Mathematical Derivations](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#mathematical-derivations)
+* [Training and Experimentation](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#training-and-experimentation)
+* [Results and Analysis](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#results-and-analysis)
+* [Submission Guidelines](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#submission-guidelines)
+* [License](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#license)
+* [Project Structure](https://chatgpt.com/c/67b0eae8-c268-8007-9df3-33d28ab21913#project-structure)
 
 ---
 
-## 🏆 Assignment Details
+## **Introduction**
 
-This assignment consists of two **major sections**:
+This repository contains Homework 2 for the Deep Generative Models course at the University of Tehran. This assignment covers  **advanced generative models** , including:
 
-### 🔹 **1. Flow-Based Generative Models**:
+* **Flow-based models** (e.g., RealNVP, Residual Flows)
+* **Generative Adversarial Networks (GANs)**
+* **Wasserstein GAN (WGAN)** and improvements over standard GANs
+* **Likelihood-based out-of-distribution (OOD) detection**
+* **Mathematical derivations and deep learning implementations**
 
-- **Understanding Normalizing Flows** (e.g., RealNVP, Residual Flows)
-- **Implementing RealNVP on FashionMNIST**
-- **Likelihood-based Out-of-Distribution Detection**
-- **Jacobian determinant estimation in residual flows**
-
-### 🔹 **2. Generative Adversarial Networks (GANs)**:
-
-- **Mathematical derivations of GAN training**
-- **Implementation of GAN and WGAN**
-- **FID (Frechet Inception Distance) for quality evaluation**
-- **Analyzing convergence and stability of GAN training**
+By completing this assignment, students will gain hands-on experience with  **modern generative models** , understand their strengths and weaknesses, and implement them in Python.
 
 ---
 
-## 📂 Sections Overview
+## **Course Information**
 
-### 🔥 **Flow-Based Generative Models**
+* **University** : University of Tehran
+* **Department** : Electrical and Computer Engineering
+* **Course** : Deep Generative Models
+* **Instructor** : Dr. Mostafa Tavasoli
+* **Term** : Fall 1403
+
+---
+
+## **Assignment Details**
+
+This assignment consists of two major sections:
+
+### **1. Flow-Based Generative Models**
+
+* Understanding Normalizing Flows (e.g., RealNVP, Residual Flows)
+* Implementing RealNVP on FashionMNIST
+* Likelihood-based Out-of-Distribution Detection
+* Jacobian determinant estimation in residual flows
+
+### **2. Generative Adversarial Networks (GANs)**
+
+* Mathematical derivations of GAN training
+* Implementation of GAN and WGAN
+* FID (Frechet Inception Distance) for quality evaluation
+* Analyzing convergence and stability of GAN training
+
+---
+
+## **Sections Overview**
+
+### **Flow-Based Generative Models**
 
 Flow-based models provide a **reversible transformation** between a simple distribution (e.g., Gaussian) and complex data distributions.
 
-#### ✅ **Tasks:**
+#### **Tasks:**
 
-1. **Understanding RealNVP (Normalizing Flow Model)**:
+1. **Understanding RealNVP (Normalizing Flow Model)** :
 
-   - Study the **original RealNVP paper**.
-   - Understand how **log-likelihood estimation** works in normalizing flows.
-2. **Implementing RealNVP on FashionMNIST**:
+* Study the  **original RealNVP paper** .
+* Understand how **log-likelihood estimation** works in normalizing flows.
 
-   - Implement **coupling transformations** for RealNVP.
-   - Train the model on **FashionMNIST dataset**.
-   - Evaluate the model by generating **out-of-distribution samples**.
-3. **Likelihood-Based OOD Detection**:
+1. **Implementing RealNVP on FashionMNIST** :
 
-   - Analyze how flow models fail in detecting **out-of-distribution samples**.
-   - Experiment with **FashionMNIST and another dataset**.
-4. **Jacobian Determinant Estimation in Residual Flows**:
+* Implement **coupling transformations** for RealNVP.
+* Train the model on  **FashionMNIST dataset** .
+* Evaluate the model by generating  **out-of-distribution samples** .
 
-   - Study how **Hutchinson trace estimator** is used for Jacobian computation.
+1. **Likelihood-Based OOD Detection** :
+
+* Analyze how flow models fail in detecting  **out-of-distribution samples** .
+* Experiment with  **FashionMNIST and another dataset** .
+
+1. **Jacobian Determinant Estimation in Residual Flows** :
+
+* Study how **Hutchinson trace estimator** is used for Jacobian computation.
 
 ---
 
-### 🔥 **Generative Adversarial Networks (GANs)**
+### **Generative Adversarial Networks (GANs)**
 
 GANs are **powerful generative models** trained using an adversarial framework.
 
-#### ✅ **Tasks:**
+#### **Tasks:**
 
-1. **Mathematical Analysis of GANs**:
+1. **Mathematical Analysis of GANs** :
 
-   - Prove why **vanishing gradients** occur in standard GAN loss.
-   - Derive **optimal discriminator function**.
-2. **Implementing GAN from Scratch**:
+* Prove why **vanishing gradients** occur in standard GAN loss.
+* Derive  **optimal discriminator function** .
 
-   - Define **generator** and **discriminator** models.
-   - Train a **FashionMNIST GAN** and visualize generated samples.
-3. **Understanding Wasserstein GAN (WGAN)**:
+1. **Implementing GAN from Scratch** :
 
-   - Explain why **WGAN improves over standard GAN**.
-   - Study the **role of Lipschitz constraint** and **critic loss**.
-4. **Implementing WGAN**:
+* Define **generator** and **discriminator** models.
+* Train a **FashionMNIST GAN** and visualize generated samples.
 
-   - Modify the standard GAN to **WGAN framework**.
-   - Train the model and compare **convergence properties**.
-5. **Evaluating GANs using FID**:
+1. **Understanding Wasserstein GAN (WGAN)** :
 
-   - Compute **Frechet Inception Distance (FID)**.
-   - Compare FID scores across **different training epochs**.
+* Explain why  **WGAN improves over standard GAN** .
+* Study the **role of Lipschitz constraint** and  **critic loss** .
+
+1. **Implementing WGAN** :
+
+* Modify the standard GAN to  **WGAN framework** .
+* Train the model and compare  **convergence properties** .
+
+1. **Evaluating GANs using FID** :
+
+* Compute  **Frechet Inception Distance (FID)** .
+* Compare FID scores across  **different training epochs** .
 
 ---
 
-## ⚙️ Implementation Details
+## **Implementation Details**
 
-### **🔹 Dataset**
+### **Dataset**
 
-- The dataset used is **FashionMNIST**.
-- **80/20** train-test split.
-- **Preprocessing**:
-  - Normalize pixel values to `[0,1]`.
+* The dataset used is  **FashionMNIST** .
+* 80/20 train-test split.
+* **Preprocessing** :
+* Normalize pixel values to `[0,1]`.
 
-### **🔹 GAN Model Architecture**
+### **GAN Model Architecture**
 
-| **Layer Type** | **Generator** | **Discriminator** |
-| -------------------- | ------------------- | ----------------------- |
-| Input                | Noise vector (100D) | 28×28 Image            |
-| Convolutional        | 4×4 Transpose Conv | 4×4 Conv               |
-| Activation           | ReLU                | LeakyReLU               |
-| BatchNorm            | Yes                 | Yes                     |
-| Output               | 28×28 Image        | Sigmoid                 |
+| Layer Type    | Generator           | Discriminator |
+| ------------- | ------------------- | ------------- |
+| Input         | Noise vector (100D) | 28×28 Image  |
+| Convolutional | 4×4 Transpose Conv | 4×4 Conv     |
+| Activation    | ReLU                | LeakyReLU     |
+| BatchNorm     | Yes                 | Yes           |
+| Output        | 28×28 Image        | Sigmoid       |
 
-### **🔹 Training Parameters**
+### **Training Parameters**
 
 | Parameter     | Value  |
 | ------------- | ------ |
@@ -145,49 +165,32 @@ GANs are **powerful generative models** trained using an adversarial framework.
 | Batch Size    | 64     |
 | Epochs        | 100    |
 
-### **🔹 Loss Functions**
+### **Loss Functions**
 
-- **GAN Loss**:
-- $$
+* **GAN Loss** :
+* $$
+  L_G = -\mathbb{E}[\log D(G(z))]
+  $$
+* $$
   L_D = -\mathbb{E}[\log D(x)] - \mathbb{E}[\log(1 - D(G(z)))]
   $$
 
-  $$
-  L_G = -\mathbb{E}[\log D(G(z))]
-  $$
-- **WGAN Loss**:
-- $$
+  **WGAN Loss** :
+* $$
   L_D = -\mathbb{E}[D(x)] + \mathbb{E}[D(G(z))]
   $$
-- $$
-  L_G = -\mathbb{E}[D(G(z))]
+* $$
+  * L_G = -\mathbb{E}[D(G(z))]
   $$
 
 ---
 
-## 📊 Mathematical Derivations
 
-### **1️⃣ Why Do GANs Suffer from Vanishing Gradients?**
 
-- When \( D(G(z)) \approx 0 \), gradients vanish.
+## **License**
 
-### **2️⃣ Why Does WGAN Work Better?**
+This project is licensed under the MIT License.
 
-- WGAN **removes sigmoid activation** and uses **Wasserstein distance** instead of KL/JS divergence.
-
-### **3️⃣ Computing FID Score**
-
-- FID measures **feature space similarity** between real and generated samples:
-  $$
-  FID = ||\mu_r - \mu_g||^2 + Tr(\Sigma_r + \Sigma_g - 2(\Sigma_r \Sigma_g)^{1/2})
-  $$
-
----
-
-## 🚀 Training and Experimentation
-
-1. **Train GAN and WGAN** and monitor **loss curves**.
-2. **Compare standard GAN and WGAN** for stability.
-3. **Compute FID scores** and analyze improvements.
+For more details, see the [LICENSE](https://chatgpt.com/c/LICENSE) file.
 
 ---
